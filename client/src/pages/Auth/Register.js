@@ -30,7 +30,7 @@ const Register = () => {
             setLoading(true);
 
             const { data } = await axios.post(
-                "http://localhost:8080/api/v1/auth/send-otp",
+                "/api/v1/auth/send-otp",
                 { email }
             );
 
@@ -52,7 +52,7 @@ const Register = () => {
     const verifyOtp = async () => {
         try {
             const { data } = await axios.post(
-                "http://localhost:8080/api/v1/auth/verify-otp",
+                "/api/v1/auth/verify-otp",
                 {
                     email,
                     otp,
@@ -81,7 +81,7 @@ const Register = () => {
 
         try {
             const res = await axios.post(
-                "http://localhost:8080/api/v1/auth/register",
+                "/api/v1/auth/register",
                 {
                     name,
                     email,

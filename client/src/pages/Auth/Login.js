@@ -23,7 +23,7 @@ const Login = () => {
 
         try {
             const { data } = await axios.post(
-                "http://localhost:8080/api/v1/auth/login-step1",
+                "/api/v1/auth/login-step1",
                 {
                     email,
                     password,
@@ -46,7 +46,7 @@ const Login = () => {
     const verifyOtp = async () => {
         try {
             const { data } = await axios.post(
-                "http://localhost:8080/api/v1/auth/login-verify",
+                "/api/v1/auth/login-verify",
                 {
                     email,
                     otp,

@@ -1,8 +1,9 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const sendOtpEmail = async (email, otp) => {
+    // ✅ create inside function so env var is available at call time
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     await resend.emails.send({
         from: "Mahaveer Collection <onboarding@resend.dev>",
         to: email,

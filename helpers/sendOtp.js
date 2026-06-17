@@ -1,14 +1,10 @@
 import nodemailer from "nodemailer";
 
 export const sendOtpEmail = async (email, otp) => {
-    console.log("EMAIL_USER =", process.env.EMAIL_USER);
-    console.log(
-        "EMAIL_PASS =",
-        process.env.EMAIL_PASS ? "FOUND" : "NOT FOUND"
-    );
-
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // use SSL
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
@@ -16,13 +12,13 @@ export const sendOtpEmail = async (email, otp) => {
     });
 
     await transporter.sendMail({
-        from: process.env.EMAIL_USER,
+        from: `"Mahaveer Collection" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: "OTP Verification",
         html: `
-      <h2>Your OTP is</h2>
-      <h1>${otp}</h1>
-      <p>Valid for 5 minutes.</p>
-    `,
+            <h2>Your OTP is</h2>
+            <h1 style="letter-spacing: 4px;">${otp}</h1>
+            <p>Valid for 5 minutes.</p>
+        `,
     });
 };

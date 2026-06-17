@@ -1,12 +1,11 @@
-import * as brevo from "@getbrevo/brevo";
+import SibApiV3Sdk from "@getbrevo/brevo";
 
 export const sendOtpEmail = async (email, otp) => {
-    const apiInstance = new brevo.TransactionalEmailsApi();
+    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-    apiInstance.authentications["apiKey"].apiKey =
-        process.env.BREVO_API_KEY;
+    apiInstance.authentications["apiKey"].apiKey = process.env.BREVO_API_KEY;
 
-    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.subject = "OTP Verification - Mahaveer Collection";
     sendSmtpEmail.to = [{ email }];

@@ -1,24 +1,19 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendOtpEmail = async (email, otp) => {
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,        // ✅ port 587 uses IPv4, port 465 uses IPv6 (blocked on Render free tier)
-        secure: false,    // ✅ false for port 587 (uses STARTTLS instead of SSL)
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
-
-    await transporter.sendMail({
-        from: `"Mahaveer Collection" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+        from: "Mahaveer Collection <onboarding@resend.dev>",
         to: email,
         subject: "OTP Verification",
         html: `
-            <h2>Your OTP is</h2>
-            <h1 style="letter-spacing: 4px;">${otp}</h1>
-            <p>Valid for 5 minutes.</p>
+            <div style="font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 30px; border: 1px solid #eee; border-radius: 12px;">
+                <h2 style="text-align: center; color: #333;">Mahaveer Collection</h2>
+                <p style="text-align: center; color: #555;">Your OTP for verification is:</p>
+                <h1 style="text-align: center; letter-spacing: 8px; color: #4f46e5; font-size: 36px;">${otp}</h1>
+                <p style="text-align: center; color: #888; font-size: 13px;">Valid for 5 minutes. Do not share this with anyone.</p>
+            </div>
         `,
     });
 };

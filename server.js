@@ -39,7 +39,7 @@ app.use("/api/v1/game", gameRoutes);
 app.use("/api/v1/voice", voiceRoutes);
 
 //rest api
-app.use("*", function (req, res) {
+app.use("/{*any}", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"))
 
 });

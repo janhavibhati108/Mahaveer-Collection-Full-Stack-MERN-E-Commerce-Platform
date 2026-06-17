@@ -12,19 +12,18 @@ const Policy = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundAttachment: "fixed",
-                    padding: "120px 20px 50px",
+                    padding: "100px 16px 50px 16px",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "flex-start",
                 }}
             >
-                {/* White Card */}
                 <div
                     style={{
                         maxWidth: "850px",
                         width: "100%",
                         background: "rgba(255, 255, 255, 0.76)",
-                        padding: "30px",
+                        padding: "24px",
                         borderRadius: "12px",
                         boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
                         backdropFilter: "blur(5px)",
@@ -34,7 +33,7 @@ const Policy = () => {
                         style={{
                             textAlign: "center",
                             marginBottom: "20px",
-                            fontSize: "32px",
+                            fontSize: "clamp(22px, 5vw, 32px)",
                             fontWeight: "700",
                             color: "#222",
                         }}
@@ -47,51 +46,26 @@ const Policy = () => {
                         to protecting your personal information.
                     </p>
 
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>
-                        1. Information We Collect
+                    {[
+                        { title: "1. Information We Collect", text: "We collect name, phone number, email, and address when you place an order." },
+                        { title: "2. How We Use Your Information", text: "We use your data only for order processing, delivery, and customer support." },
+                        { title: "3. Data Protection", text: "Your personal information is kept secure and never sold or shared." },
+                        { title: "4. Payment Security", text: "All payments are processed through secure gateways. We do not store card details." },
+                        { title: "5. Cookies", text: "Cookies are used to improve user experience and website performance." },
+                        { title: "6. Policy Updates", text: "We may update this policy anytime. Changes will be posted here." },
+                    ].map((item) => (
+                        <div key={item.title}>
+                            <h3 style={{ marginTop: "20px", color: "#333", fontSize: "clamp(16px, 3vw, 22px)" }}>
+                                {item.title}
+                            </h3>
+                            <p style={{ color: "#555", fontWeight: "500" }}>{item.text}</p>
+                        </div>
+                    ))}
+
+                    <h3 style={{ marginTop: "20px", color: "#333", fontSize: "clamp(16px, 3vw, 22px)" }}>
+                        7. Contact Us
                     </h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        We collect name, phone number, email, and address when you place an
-                        order.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>
-                        2. How We Use Your Information
-                    </h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        We use your data only for order processing, delivery, and customer
-                        support.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>
-                        3. Data Protection
-                    </h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        Your personal information is kept secure and never sold or shared.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>
-                        4. Payment Security
-                    </h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        All payments are processed through secure gateways. We do not store
-                        card details.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>5. Cookies</h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        Cookies are used to improve user experience and website performance.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>
-                        6. Policy Updates
-                    </h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
-                        We may update this policy anytime. Changes will be posted here.
-                    </p>
-
-                    <h3 style={{ marginTop: "20px", color: "#333" }}>7. Contact Us</h3>
-                    <p style={{ color: "#555", fontWeight: "500", }}>
+                    <p style={{ color: "#555", fontWeight: "500", wordBreak: "break-all" }}>
                         Email: <b>support@mahaveercollection.com</b>
                     </p>
                 </div>

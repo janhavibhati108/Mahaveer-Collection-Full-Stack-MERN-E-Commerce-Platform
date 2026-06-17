@@ -1,7 +1,6 @@
 # Mahaveer Collection – Full Stack MERN E-Commerce Platform
 
-#### Video Demo: https://mahaveer-collection-full-stack-mern-e-xpfz.onrender.com
-
+#### Video Demo: https://youtu.be/SZGYIBw25OI?si=A_spe_qWro8GSR9N
 #### Description
 
 Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed to provide a secure, engaging, and scalable online shopping experience. The platform combines modern e-commerce functionality with gamification and AI-powered assistance.

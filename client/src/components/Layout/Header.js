@@ -14,7 +14,6 @@ const Header = () => {
     const categories = useCategory();
 
     const handleLogout = () => {
-        // Just clear auth — cart context will auto-switch to guest cart
         setAuth({ ...auth, user: null, token: "" });
         localStorage.removeItem("auth");
         toast.success("Logout Successfully");
@@ -24,38 +23,63 @@ const Header = () => {
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
                 <div className="container-fluid">
+
+                    {/* ✅ Brand always visible on mobile — outside collapse */}
+                    <Link to="/" className="navbar-brand d-flex align-items-center">
+                        <div className="logo-circle">
+                            <GiClothes color="blue" size={32} />
+                        </div>
+                        <span style={{
+                            fontWeight: "bold",
+                            letterSpacing: "2px",
+                            fontSize: "clamp(11px, 2.5vw, 16px)", // ✅ shrinks on small screens
+                        }}>
+                            MAHAVEER COLLECTION
+                        </span>
+                    </Link>
+
+                    {/* ✅ Cart badge visible on mobile next to toggler */}
+                    <div className="d-flex align-items-center d-lg-none gap-2 ms-auto me-2">
+                        <NavLink to="/cart" className="nav-link p-0">
+                            <Badge count={cart?.length} showZero offset={[10, -5]}>
+                                🛒
+                            </Badge>
+                        </NavLink>
+                    </div>
+
+                    {/* Toggler */}
                     <button
                         className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#navbarTogglerDemo01"
-                        aria-controls="navbarTogglerDemo01"
+                        data-bs-target="#navbarMain"
+                        aria-controls="navbarMain"
                         aria-expanded="false"
                         aria-label="Toggle navigation"
                     >
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <Link to="/" className="navbar-brand d-flex align-items-center">
-                            <div className="logo-circle">
-                                <GiClothes color="blue" size={45} />
-                            </div>
-                            <span style={{ fontWeight: "bold", letterSpacing: "4px" }}>
-                                MAHAVEER COLLECTION
-                            </span>
-                        </Link>
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <SearchInput />
+
+                    {/* Collapsible menu */}
+                    <div className="collapse navbar-collapse" id="navbarMain">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+
+                            {/* Search */}
+                            <li className="nav-item">
+                                <SearchInput />
+                            </li>
+
                             <li className="nav-item">
                                 <NavLink to="/" className="nav-link">Home</NavLink>
                             </li>
+
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to={"/categories"} data-bs-toggle="dropdown">
+                                <Link className="nav-link dropdown-toggle" to="/categories" data-bs-toggle="dropdown">
                                     Categories
                                 </Link>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <Link className="dropdown-item" to={"/categories"}>All Categories</Link>
+                                        <Link className="dropdown-item" to="/categories">All Categories</Link>
                                     </li>
                                     {categories?.map((c) => (
                                         <li key={c._id}>
@@ -64,6 +88,7 @@ const Header = () => {
                                     ))}
                                 </ul>
                             </li>
+
                             <li className="nav-item">
                                 <NavLink to="/game" className="nav-link" style={({ isActive }) => ({
                                     fontWeight: isActive ? "bold" : "normal",
@@ -72,6 +97,7 @@ const Header = () => {
                                     🎮 Win Discount
                                 </NavLink>
                             </li>
+
                             {!auth?.user ? (
                                 <>
                                     <li className="nav-item">
@@ -84,15 +110,14 @@ const Header = () => {
                             ) : (
                                 <li className="nav-item dropdown">
                                     <NavLink
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
+                                            className="nav-link dropdown-toggle"
                                         role="button"
                                         data-bs-toggle="dropdown"
                                         style={{ border: "none" }}
                                     >
                                         {auth?.user?.name}
                                     </NavLink>
-                                    <ul className="dropdown-menu">
+                                        <ul className="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <NavLink
                                                 to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
@@ -109,13 +134,16 @@ const Header = () => {
                                     </ul>
                                 </li>
                             )}
-                            <li className="nav-item">
+
+                            {/* Cart — hidden on mobile since shown above toggler */}
+                            <li className="nav-item d-none d-lg-block">
                                 <NavLink to="/cart" className="nav-link">
                                     <Badge count={cart?.length} showZero offset={[10, -5]}>
                                         Cart
                                     </Badge>
                                 </NavLink>
                             </li>
+
                         </ul>
                     </div>
                 </div>

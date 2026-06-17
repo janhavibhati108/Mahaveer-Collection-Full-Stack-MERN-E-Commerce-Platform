@@ -22,82 +22,122 @@ const Orders = () => {
         if (auth?.token) getOrders();
     }, [auth?.token]);
 
-    // ✅ Sum quantity across all line items (grouped products)
     const totalItems = (products) =>
         products?.reduce((sum, p) => sum + (p.quantity || 1), 0) || 0;
 
     return (
         <Layout title={"Your Orders"}>
-            <div className="container-flui p-3 m-3 dashboard">
-                <div className="row">
+            <div className="container-fluid p-3 dashboard" style={{ marginTop: "70px" }}>
+                <div className="row g-3">
                     {/* Sidebar */}
-                    <div className="col-md-3">
+                    <div className="col-12 col-md-3">
                         <UserMenu />
                     </div>
 
                     {/* Orders Section */}
-                    <div className="col-md-9">
-                        <h1 className="text-center">All Orders</h1>
+                    <div className="col-12 col-md-9">
+                        <h1 className="text-center mb-3" style={{ fontSize: "clamp(20px, 4vw, 32px)" }}>
+                            All Orders
+                        </h1>
+
+                        {orders?.length === 0 && (
+                            <p className="text-center text-muted">No orders yet.</p>
+                        )}
 
                         {orders?.map((o, i) => (
-                            <div className="border shadow mb-4 p-2" key={o._id || i}>
-                                {/* Order Summary Table */}
-                                <table className="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Status</th>
-                                            <th>Buyer</th>
-                                            <th>Date</th>
-                                            <th>Payment</th>
-                                            <th>Items</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{i + 1}</td>
-                                            <td>{o?.status}</td>
-                                            <td>{o?.buyer?.name}</td>
-                                            <td>{moment(o?.createdAt).fromNow()}</td>
-                                            <td>{o?.payment?.success ? "Success" : "Failed"}</td>
-                                            {/* ✅ shows total units e.g. 3, not number of line items */}
-                                            <td>{totalItems(o?.products)}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div className="border shadow mb-4 rounded" key={o._id || i}>
+
+                                {/* ✅ Scrollable table on mobile */}
+                                <div style={{ overflowX: "auto" }}>
+                                    <table className="table mb-0" style={{ minWidth: "500px" }}>
+                                        <thead className="table-light">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Status</th>
+                                                <th>Buyer</th>
+                                                <th>Date</th>
+                                                <th>Payment</th>
+                                                <th>Items</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{i + 1}</td>
+                                                <td>
+                                                    <span style={{
+                                                        background: "#f3f0ff",
+                                                        color: "#7c3aed",
+                                                        padding: "2px 10px",
+                                                        borderRadius: "20px",
+                                                        fontSize: "13px",
+                                                        fontWeight: 600,
+                                                    }}>
+                                                        {o?.status}
+                                                    </span>
+                                                </td>
+                                                <td>{o?.buyer?.name}</td>
+                                                <td style={{ whiteSpace: "nowrap" }}>
+                                                    {moment(o?.createdAt).fromNow()}
+                                                </td>
+                                                <td>
+                                                    <span style={{
+                                                        color: o?.payment?.success ? "#16a34a" : "#dc2626",
+                                                        fontWeight: 600,
+                                                        fontSize: "13px",
+                                                    }}>
+                                                        {o?.payment?.success ? "✅ Success" : "❌ Failed"}
+                                                    </span>
+                                                </td>
+                                                <td>{totalItems(o?.products)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 {/* Products List */}
-                                <div className="container">
+                                <div className="p-2">
                                     {o?.products?.map((p, idx) => (
                                         <div
-                                            className="row mb-2 p-3 card flex-row"
+                                            className="card mb-2 p-2"
                                             key={p._id + idx}
+                                            style={{ border: "1px solid #f0f0f0" }}
                                         >
-                                            {/* Product Image */}
-                                            <div className="col-md-4">
+                                            <div className="d-flex gap-3 align-items-center flex-wrap">
+                                                {/* Product Image */}
                                                 <img
                                                     src={`/api/v1/product/product-photo/${p._id}`}
                                                     alt={p.name}
-                                                    className="order-product-img"
+                                                    style={{
+                                                        width: "80px",
+                                                        height: "80px",
+                                                        objectFit: "cover",
+                                                        borderRadius: "10px",
+                                                        flexShrink: 0,
+                                                    }}
                                                 />
-                                            </div>
 
-                                            {/* Product Details */}
-                                            <div className="col-md-8">
-                                                <p><b>Name:</b> {p.name}</p>
-                                                <p><b>Price:</b> ₹{p.price}</p>
-                                                {/* ✅ show quantity per line item */}
-                                                <p><b>Quantity:</b> {p.quantity || 1}</p>
-                                                <p>
-                                                    <b>Size:</b>{" "}
-                                                    {p.size ? (
-                                                        <span style={{ color: "#16a34a", fontWeight: 600 }}>
-                                                            {p.size}
-                                                        </span>
-                                                    ) : (
-                                                        <span style={{ color: "#999" }}>N/A</span>
-                                                    )}
-                                                </p>
+                                                {/* Product Details */}
+                                                <div style={{ flex: 1, minWidth: "150px" }}>
+                                                    <p className="mb-1" style={{ fontWeight: 600, fontSize: "14px" }}>
+                                                        {p.name}
+                                                    </p>
+                                                    <p className="mb-1" style={{ fontSize: "13px", color: "#555" }}>
+                                                        <b>Price:</b> ₹{p.price}
+                                                    </p>
+                                                    <p className="mb-1" style={{ fontSize: "13px", color: "#555" }}>
+                                                        <b>Qty:</b> {p.quantity || 1}
+                                                    </p>
+                                                    <p className="mb-0" style={{ fontSize: "13px" }}>
+                                                        <b>Size:</b>{" "}
+                                                        {p.size ? (
+                                                            <span style={{ color: "#16a34a", fontWeight: 600 }}>
+                                                                {p.size}
+                                                            </span>
+                                                        ) : (
+                                                            <span style={{ color: "#999" }}>N/A</span>
+                                                        )}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}

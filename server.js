@@ -10,6 +10,10 @@ import gameRoutes from "./routes/gameRoute.js";
 import voiceRoutes from "./routes/voiceRoute.js";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 //configure env
@@ -55,6 +59,3 @@ app.listen(PORT, () => {
     );
 });
 
-//MONGO_URL=mongodb+srv://janhavibhati2004_db_user:CuS873fdCGmILyPl@cluster0.eezx2a3.mongodb.net/eCom
-//mongodb+srv://<db_username>:<db_password>@cluster0.eezx2a3.mongodb.net/?appName=Cluster0
-//$env:Path += ";C:\Program Files\nodejs"

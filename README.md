@@ -1,15 +1,14 @@
-
-link: https://mahaveer-collection-full-stack-mern-e-xpfz.onrender.com
-
 # Mahaveer Collection – Full Stack MERN E-Commerce Platform
 
-## Overview
+#### Video Demo: https://mahaveer-collection-full-stack-mern-e-xpfz.onrender.com
+
+#### Description
 
 Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed to provide a secure, engaging, and scalable online shopping experience. The platform combines modern e-commerce functionality with gamification and AI-powered assistance.
 
-## Features
+Features
 
-### Authentication & Security
+Authentication & Security
 
 * OTP-based User Registration
 * Secure Login & Logout
@@ -17,7 +16,7 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * JWT Authentication
 * Protected Routes & Role-Based Access Control
 
-### E-Commerce Features
+E-Commerce Features
 
 * Product Catalog Management
 * Category-Based Products
@@ -26,19 +25,19 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * Stock & Inventory Management
 * Responsive Design
 
-### Gamification
+Gamification
 
 * Pexeso (Memory Card Matching) Game
 * Discount Coupon Generation on Win
 * Coupon Validation & Usage Tracking
 
-### Voice Assistant
+Voice Assistant
 
 * Rule-Based Voice Assistant
 * Voice Navigation Commands
 * User Assistance for Shopping
 
-### Admin Dashboard
+Admin Dashboard
 
 * Product CRUD Operations
 * Category Management
@@ -46,14 +45,14 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * User Management
 * Inventory Monitoring
 
-### Payment Integration
+Payment Integration
 
 * Braintree Sandbox Payment Gateway
 * Secure Test Transactions
 
-## Tech Stack
+Tech Stack
 
-### Frontend
+Frontend
 
 * React.js
 * React Router
@@ -63,19 +62,19 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * CSS3
 * JavaScript (ES6+)
 
-### Backend
+Backend
 
 * Node.js
 * Express.js
 * JWT
 * bcrypt
 
-### Database
+Database
 
 * MongoDB
 * Mongoose
 
-# Skills Demonstrated
+Skills Demonstrated
 
 * Full Stack MERN Development
 * REST API Development
@@ -88,7 +87,7 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * Secure Coding Practices
 * MVC Architecture
 
-# Future Enhancements
+Future Enhancements
 
 * AI Recommendation System
 * Product Reviews & Ratings
@@ -96,7 +95,7 @@ Mahaveer Collection is a feature-rich MERN Stack E-Commerce application designed
 * Advanced Analytics Dashboard
 * Real Payment Gateway Deployment
 
-# Author
+Author
 
 Janhavi Bhati
 
